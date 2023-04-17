@@ -1,12 +1,13 @@
 %% Pariz, etal, PLOS Com. Bio. 2021
-% In This code, I simulate the population for one time, and then I find the
-% location of fast pulses. I created the signal and rerun the code with
-% same parameters, and apply the signal to selected neurons.
-% The save variable will be the spikes of the population with and without
-% signal (RHO0, RHO), the location of the applied pulse (Pulse_Loc in time step), and the signal
-% itself (ISIG). The inhomogeneity on input current of first population
-% varies as DI and the delay between populations as DE.
-% The code written in MATLAB R2016a by Aref Pariz.
+% In This code, for each value of inhomogeneity in input current (DI) 
+% and delay among populations (DE), the code is simulated once, and 
+% then the location of fast pulses is being found. By defining the signal we rerun 
+% the code with the same parameters and apply the signal to selected neurons.
+% The saved variable will be the spikes in the population with and without 
+% signal, RHO0, RHO, respectively, the location of the applied pulse (Pulse_Loc in time step), and the signal
+% itself (ISIG). 
+% The code is written in MATLAB R2016a by Aref Pariz.
+
 clc
 clear
 %% Constants
@@ -128,8 +129,8 @@ for out_delay=DE
                 toc
                 %%
                 sigma=2;
-                fast_rate_conv;
-                rr0=rr;
+                rr0=fast_rate_conv(rho,sigma,dh,type);
+                
                 [peaks,places]=findpeaks(rr0(1,:),'MinPeakProminence',20);
                 freq=ceil(mean(sum(rho(1:Ne,:),2)/sec,1));
                 seg=50;

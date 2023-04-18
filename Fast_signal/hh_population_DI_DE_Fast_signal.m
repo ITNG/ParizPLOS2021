@@ -129,8 +129,8 @@ for out_delay=DE
                 toc
                 %%
                 sigma=2;
-                rr0=fast_rate_conv(rho,sigma,dh,type);
-                
+                fast_rate_conv;
+                rr0=rr;
                 [peaks,places]=findpeaks(rr0(1,:),'MinPeakProminence',20);
                 freq=ceil(mean(sum(rho(1:Ne,:),2)/sec,1));
                 seg=50;
